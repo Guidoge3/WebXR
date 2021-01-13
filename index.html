@@ -1,0 +1,71 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+        <a-assets>
+            <img id="360-Panorama" src="BrightSky.jpg">
+            <img id="floor" src="Vloer Lam.jpg">
+            <img id="floor-ding" src="Vloer Lam 2.jpg">
+        </a-assets>
+        <a-sky src="#360-Panorama"
+               radius="25"
+               side="double"
+               position="0 -1.8 0">
+        </a-sky>     
+        <a-plane material="color: #floor;
+                           src: #floor-ding;
+                           repeat: 30 30;
+                           normal-map: #floor-ding;
+                           normal-texture-repeat: 30 30"
+                  position="0 -1.8 0"
+                  rotation="-90 0 0"
+                  scale="60 60 2">        
+        </a-plane>
+        <a-entity camera look-controls wasd-controls="acceleration:25" position="0 0 0">
+          <a-entity geometry="primitive: plane; height: 0.02; width: 0.02" position="0 0 -1"
+                    material="color: gray; opacity: 0.8"
+                    fov="90"
+                    raycaster="showLine: true; far: 100" line="color: orange; opacity: 0.5"></a-entity>
+        </a-entity>
+        <a-box color="#AC1509"
+               position="0 -0.6 -6"
+               scale="0.6 0.6 0.6"
+               animation__spin="dur:7500;easing:linear;to: 360 720 180;loop:-1;property:rotation;class:ui"
+               animation__start="property: material; from: #AC1509; to: #BD3525;
+                                startEvents: mouseenter; dur:500; easing: linear"
+               animation__stop="property: material; from: #BD3525; to: #AC1509;
+                                startEvents: mouseleave; dur:500; easing: linear"
+               event__scale="_target: #Textwall1; _event: click;
+                                animation.property: scale;
+                                animation.to: 3 0.7 0.01;
+                                animation.easing: easeInOutBack"
+               event__position="_target: #Textwall1; _event: click;
+                                   animation.property: position;
+                                   animation.to: 0 0.7 -6">
+        </a-box>
+        <a-box scale="3 0.05 3"
+               position="0 -1.8 -6"
+               color="#BAEAFF">
+        </a-box>
+        <a-box id="Textwall1"
+               color="BA52EF"
+               position="0 -0.55 -6"
+               scale="0.3 0.3 0.3">
+        </a-box>
+        <a-text
+          value="Welcome to the L.A.M museum"
+          position="-1.6 1.2 -6.5">
+        </a-text>
+        <a-entity id="box"
+                  class="clickable"
+                  cursor-listener geometry="primitive: box"
+                  width="1" height="1" depth="1"
+                  position="5 1.8 0"
+                  scale="1 1.25 1">
+               <a-animation attribute="rotation" begin="click" repeat="indefinite" to="0 360 0"></a-animation>
+        </a-entity>
+    </a-scene>
+  </body>
+</html>
